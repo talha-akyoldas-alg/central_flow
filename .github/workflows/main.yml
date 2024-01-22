@@ -24,17 +24,20 @@ jobs:
 
       - name: Run Newman Script (Alternative)
         env:
+          #Source Workflow Client Payload
           STATUS: ${{ github.event.client_payload.status }}
           WORKFLOW: ${{ github.event.client_payload.workflow }}
           BRANCH: ${{ github.event.client_payload.branch }}
           REPO: ${{ github.event.client_payload.repo }}
           ARTIFACT: ${{ github.event.client_payload.artifact }} 
-
+          
+          #BinBin API Gateway
           BINBINAPIGW_COLLECTION_ID: ${{ secrets.BINBINAPIGW_COLLECTION_ID }}
           BINBINAPIGW_TEST_ENVIRONMENT_ID: ${{ secrets.BINBINAPIGW_TEST_ENVIRONMENT_ID }}
           BINBINAPIGW_WORKSPACE_ID: ${{ secrets.BINBINAPIGW_WORKSPACE_ID }}
           BINBINAPIGW_API_TOKEN: ${{ secrets.BINBINAPIGW_API_TOKEN }}
 
+          #Algoritma TOMP API
           TOMP_COLLECTION_ID: ${{ secrets.TOMP_COLLECTION_ID }}
           TOMP_TEST_ENVIRONMENT_ID: ${{ secrets.TOMP_TEST_ENVIRONMENT_ID }}
           TOMP_WORKSPACE_ID: ${{ secrets.TOMP_WORKSPACE_ID }}
