@@ -40,7 +40,7 @@ jobs:
           TOMP_WORKSPACE_ID: ${{ secrets.TOMP_WORKSPACE_ID }}
           TOMP_API_TOKEN: ${{ secrets.TOMP_API_TOKEN }}
 
-        run:
+        run: |
           chmod +x newman.sh
           ./newman.sh "succeed" "test" "test" "binbin-api-gateway" "artifact" "$BINBINAPIGW_COLLECTION_ID" "$BINBINAPIGW_TEST_ENVIRONMENT_ID" "$BINBINAPIGW_WORKSPACE_ID" "$BINBINAPIGW_API_TOKEN" "$TOMP_COLLECTION_ID" "$TOMP_TEST_ENVIRONMENT_ID" "$TOMP_WORKSPACE_ID" "$TOMP_API_TOKEN"
 
