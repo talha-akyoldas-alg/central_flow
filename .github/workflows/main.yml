@@ -32,20 +32,24 @@ jobs:
           ARTIFACT: ${{ github.event.client_payload.artifact }} 
           
           #BinBin API Gateway
+          
+          #BinBin API Gateway
           BINBINAPIGW_COLLECTION_ID: ${{ secrets.BINBINAPIGW_COLLECTION_ID }}
           BINBINAPIGW_TEST_ENVIRONMENT_ID: ${{ secrets.BINBINAPIGW_TEST_ENVIRONMENT_ID }}
           BINBINAPIGW_WORKSPACE_ID: ${{ secrets.BINBINAPIGW_WORKSPACE_ID }}
           BINBINAPIGW_API_TOKEN: ${{ secrets.BINBINAPIGW_API_TOKEN }}
           
           #Algoritma TOMP API
+
+          #Algoritma TOMP API
           TOMP_COLLECTION_ID: ${{ secrets.TOMP_COLLECTION_ID }}
           TOMP_TEST_ENVIRONMENT_ID: ${{ secrets.TOMP_TEST_ENVIRONMENT_ID }}
           TOMP_WORKSPACE_ID: ${{ secrets.TOMP_WORKSPACE_ID }}
           TOMP_API_TOKEN: ${{ secrets.TOMP_API_TOKEN }}
 
-        run:
+        run: |
           chmod +x newman.sh
-          ./newman.sh "$STATUS" "$WORKFLOW" "$BRANCH" "$REPO" "$ARTIFACT" "$BINBINAPIGW_COLLECTION_ID" "$BINBINAPIGW_TEST_ENVIRONMENT_ID" "$BINBINAPIGW_WORKSPACE_ID" "$BINBINAPIGW_API_TOKEN" "$TOMP_COLLECTION_ID" "$TOMP_TEST_ENVIRONMENT_ID" "$TOMP_WORKSPACE_ID" "$TOMP_API_TOKEN"
+          ./newman.sh "succeed" "test" "test" "binbin-api-gateway" "artifact" "$BINBINAPIGW_COLLECTION_ID" "$BINBINAPIGW_TEST_ENVIRONMENT_ID" "$BINBINAPIGW_WORKSPACE_ID" "$BINBINAPIGW_API_TOKEN" "$TOMP_COLLECTION_ID" "$TOMP_TEST_ENVIRONMENT_ID" "$TOMP_WORKSPACE_ID" "$TOMP_API_TOKEN"
 
       - name: Recording Newman HTML Test Report
         uses: actions/upload-artifact@v4
@@ -76,4 +80,4 @@ jobs:
           REPO: ${{ github.event.client_payload.repo }}
         run: |
           chmod +x notifier.sh
-          ./notifier.sh "$WORKFLOW" "$REPO" "$ARTIFACT" "$GOOGLE_CHAT_BINBIN_TEST_URL" "$GOOGLE_CHAT_BINBIN_PROD_URL" "$GOOGLE_CHAT_ALGORITMA_TEST_URL" "$GOOGLE_CHAT_ALGORITMA_PROD_URL"
+          ./notifier.sh "test" "binbin-api-gateway" "arti" "$GOOGLE_CHAT_BINBIN_TEST_URL" "$GOOGLE_CHAT_BINBIN_PROD_URL" "$GOOGLE_CHAT_ALGORITMA_TEST_URL" "$GOOGLE_CHAT_ALGORITMA_PROD_URL"
