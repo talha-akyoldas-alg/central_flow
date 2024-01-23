@@ -8,7 +8,7 @@ WORKSPACE_ID="$3"
 POSTMAN_API_TOKEN="$4"
 
 echo "Running Scheduled Newman Command"
-newman run https://api.getpostman.com/collections/$COLLECTION_ID\?apikey\=$POSTMAN_API_TOKEN -e https://api.getpostman.com/environments/$ENVIRONMENT_ID\?apikey\=$POSTMAN_API_TOKEN -r cli,json,postman-cloud,htmlextra --reporter-json-export newman_json_report.json --reporter-postman-cloud-apiKey "$POSTMAN_API_TOKEN" --reporter-postman-cloud-workspaceId "$POSTMAN_WORKSPACE_ID" --reporter-htmlextra-export testResults/htmlreport.html | tee newman_terminal_output.txt
+newman run https://api.getpostman.com/collections/$COLLECTION_ID\?apikey\=$POSTMAN_API_TOKEN -e https://api.getpostman.com/environments/$ENVIRONMENT_ID\?apikey\=$POSTMAN_API_TOKEN -r cli,json,postman-cloud,htmlextra --reporter-json-export newman_json_report.json --reporter-postman-cloud-apiKey $POSTMAN_API_TOKEN --reporter-postman-cloud-workspaceId $WORKSPACE_ID --reporter-htmlextra-export testResults/htmlreport.html | tee newman_terminal_output.txt
 
 #Extracting Postman Cloud Result URL from Newman Terminal Output
 url=$(grep -o 'https://go.postman.co/workspace/[^ ]*' newman_terminal_output.txt | head -1)
