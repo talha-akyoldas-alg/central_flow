@@ -4,6 +4,7 @@
 GOOGLE_CHAT_URL="$1"
 
 TIME=$(TZ="Europe/Istanbul" date '+%Y-%m-%d %H:%M:%S')
+REPOSITORY="binbin-api-gateway"
 
 # Set the title and subtitle based on job type and build status
 TITLE="${REPOSITORY##*/} Scheduled Regression Test Results" 

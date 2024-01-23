@@ -13,11 +13,9 @@ newman run https://api.getpostman.com/collections/$COLLECTION_ID\?apikey\=$POSTM
 #Extracting Postman Cloud Result URL from Newman Terminal Output
 url=$(grep -o 'https://go.postman.co/workspace/[^ ]*' newman_terminal_output.txt | head -1)
 echo "$url" > newman_terminal_output.txt
-pwd
 echo "URL extracted and saved to newman_terminal_output.txt"
 urlFromFile=$(cat newman_terminal_output.txt | tr -d '\n')
 echo "POSTMAN_CLOUD_REPORT_BUTTON_LINK=$urlFromFile" >> $GITHUB_ENV
 
 #Make Directory for Newman HTML reports
-pwd
 mkdir -p testResults

@@ -44,17 +44,13 @@ jobs:
   
       - name: Extracting Results for the Google Chat Notification
         run: |
-          pwd
           cd workflow_scripts/cronjob
-          pwd
           echo "Running report_helper.js script..."
           node ./report_helper.js
 
       - name: Setting Extracted Results as Environment Variables
         run: |
-          pwd
           cd workflow_scripts/cronjob
-          pwd
           chmod +x extracted_results.txt
           cat extracted_results.txt >> $GITHUB_ENV
 
@@ -64,8 +60,6 @@ jobs:
           POSTMAN_CLOUD_REPORT_BUTTON_LINK: ${{ env.POSTMAN_CLOUD_REPORT_BUTTON_LINK }}
           GOOGLE_CHAT_URL: ${{ secrets.SCHEDULED_GOOGLE_CHAT_BINBIN_TEST_URL }}
         run: |
-          pwd
           cd workflow_scripts/cronjob
-          pwd
           chmod +x notifier.sh
           ./notifier.sh "$GOOGLE_CHAT_URL"
