@@ -7,7 +7,7 @@ TIME=$(TZ="Europe/Istanbul" date '+%Y-%m-%d %H:%M:%S')
 REPOSITORY="binbin-api-gateway"
 
 # Set the title and subtitle based on job type and build status
-TITLE="${REPOSITORY##*/} Scheduled Regression Test Results" 
+TITLE="${REPOSITORY##*/} Scheduled Test Results" 
 
 if [ -z "$GOOGLE_CHAT_URL" ]; then
   echo "Error: GOOGLE_CHAT_URL is empty"
@@ -49,6 +49,12 @@ JSON_PAYLOAD=$(cat << EOM
                             "keyValue": {
                                 "topLabel": "Time (Istanbul)",
                                 "content": "$TIME"
+                            }
+                        },
+                        {
+                            "keyValue": {
+                                "topLabel": "Result",
+                                "content": "$SUCCESS_RATIO% SUCCESS"
                             }
                         },
                         {

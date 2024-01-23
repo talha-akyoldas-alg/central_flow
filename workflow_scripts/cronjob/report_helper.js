@@ -26,7 +26,8 @@ fs.readFile('newman_json_report.json' , 'utf8', (err, data) => {
     DATA_RECEIVED_TOTAL: (data.run.transfers.responseTotal / (1024 * 1024)).toFixed(2), // Convert to MB
     RESPONSE_TIME_TOTAL: Math.round(data.run.timings.responseAverage), // Rounded value
     RESPONSE_TIME_MIN: Math.round(data.run.timings.responseMin), // Rounded value
-    RESPONSE_TIME_MAX: (data.run.timings.responseMax/1000).toFixed(2)  // Rounded value
+    RESPONSE_TIME_MAX: (data.run.timings.responseMax/1000).toFixed(2),  // Rounded value
+    SUCCESS_RATIO: ((data.run.stats.assertions.failed)/(data.run.stats.prerequestScripts.total))*100
   };
 
   const extractedResults = Object.entries(results).map(([key, value]) =>

@@ -13,7 +13,7 @@ TIME=$(TZ="Europe/Istanbul" date '+%Y-%m-%d %H:%M:%S')
 
 
 # Set the title for Google Chat Card
-TITLE="${REPOSITORY##*/} Regression Test Results" 
+TITLE="${REPOSITORY##*/} Test Results" 
 
 
 # Convert to lowercase
@@ -79,6 +79,12 @@ JSON_PAYLOAD=$(cat << EOM
                             "keyValue": {
                                 "topLabel": "Time (Istanbul)",
                                 "content": "$TIME"
+                            }
+                        },
+                        {
+                            "keyValue": {
+                                "topLabel": "Result",
+                                "content": "$SUCCESS_RATIO% SUCCESS"
                             }
                         },
                         {
