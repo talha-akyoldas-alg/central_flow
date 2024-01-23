@@ -1,6 +1,6 @@
 #!/bin/bash
-# send_notification.sh
 
+# Assign passed arguments to variables.....
 WORKFLOW="$1"
 REPOSITORY="$2"
 ARTIFACT="$3"
@@ -12,7 +12,7 @@ GOOGLE_CHAT_ALGORITMA_PROD_URL="$7"
 TIME=$(TZ="Europe/Istanbul" date '+%Y-%m-%d %H:%M:%S')
 
 
-# Set the title and subtitle based on job type and build status
+# Set the title for Google Chat Card
 TITLE="${REPOSITORY##*/} Regression Test Results" 
 
 
@@ -47,7 +47,7 @@ fi
 SUCCESS_ICON="https://www.iconsdb.com/icons/preview/green/ok-xxl.png"
 FAILURE_ICON="https://www.iconsdb.com/icons/preview/red/x-mark-3-xxl.png"
 
-# Set subtitle based on assertions failed count
+# Set Subtitle and Image URL based on assertions failed count
 if [ "$ASSERTIONS_FAILED" -gt 0 ]; then
   IMAGE_URL="$FAILURE_ICON"
   SUBTITLE="We have a failed test!"
@@ -57,7 +57,7 @@ else
 fi
 
 
-#Seting Button Texts
+#Set Button Texts
 POSTMAN_CLOUD_REPORT_BUTTON_TEXT="POSTMAN CLOUD REPORT"
 NEWMAN_HTML_REPORT_BUTTON_TEXT="NEWMAN HTML REPORT"
 
@@ -161,7 +161,7 @@ EOM
 )
 
 
-# Send notification to Google Chat
+# Send HTTP Request to Google Chat
 curl -H 'Content-Type: application/json' -X POST \
   "${GOOGLE_CHAT_URL}" \
   --data "$JSON_PAYLOAD"

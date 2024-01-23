@@ -11,20 +11,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Seting up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '16'
 
-      - name: Install Newman dependencies
+      - name: Installing Newman dependencies
         run: |
           npm install -g newman
           npm install -g newman-reporter-postman-cloud
           npm install -g newman-reporter-htmlextra
 
-      - name: Run Newman Script (Alternative)
+      - name: Running Newman Script
         env:
-          #Source Workflow Client Payload
+          #From Source Workflow Client Payload
           STATUS: ${{ github.event.client_payload.status }}
           WORKFLOW: ${{ github.event.client_payload.workflow }}
           BRANCH: ${{ github.event.client_payload.branch }}
@@ -32,10 +32,14 @@ jobs:
           ARTIFACT: ${{ github.event.client_payload.artifact }} 
           
           #BinBin API Gateway
+          
+          #BinBin API Gateway
           BINBINAPIGW_COLLECTION_ID: ${{ secrets.BINBINAPIGW_COLLECTION_ID }}
           BINBINAPIGW_TEST_ENVIRONMENT_ID: ${{ secrets.BINBINAPIGW_TEST_ENVIRONMENT_ID }}
           BINBINAPIGW_WORKSPACE_ID: ${{ secrets.BINBINAPIGW_WORKSPACE_ID }}
           BINBINAPIGW_API_TOKEN: ${{ secrets.BINBINAPIGW_API_TOKEN }}
+          
+          #Algoritma TOMP API
 
           #Algoritma TOMP API
           TOMP_COLLECTION_ID: ${{ secrets.TOMP_COLLECTION_ID }}
