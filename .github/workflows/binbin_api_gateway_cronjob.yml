@@ -40,12 +40,13 @@ jobs:
         id: artifact-upload-step
         with: 
           name: Newman HTML Test Report
-          path: testResults
+          path: workflow_scripts/cronjob/testResults
   
       - name: Extracting Results for the Google Chat Notification
         run: |
           pwd
           cd workflow_scripts/cronjob
+          pwd
           echo "Running report_helper.js script..."
           node ./report_helper.js
 
