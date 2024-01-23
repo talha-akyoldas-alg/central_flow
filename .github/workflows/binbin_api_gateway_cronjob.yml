@@ -53,6 +53,8 @@ jobs:
       - name: Setting Extracted Results as Environment Variables
         run: |
           pwd
+          cd workflow_scripts/cronjob
+          pwd
           chmod +x extracted_results.txt
           cat extracted_results.txt >> $GITHUB_ENV
 
@@ -64,5 +66,6 @@ jobs:
         run: |
           pwd
           cd workflow_scripts/cronjob
+          pwd
           chmod +x notifier.sh
           ./notifier.sh "$GOOGLE_CHAT_URL"
