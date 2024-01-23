@@ -17,21 +17,24 @@ TOMP_WORKSPACE_ID="$12"
 TOMP_API_TOKEN="$13"
 
 
+
 if [[ "$BUILD_STATUS" == "cancelled" || "$BUILD_STATUS" == "skipped" ]]; then
   echo "Workflow skipped / cancelled"
   exit 1
 fi
 
+
+# Set the title
 TITLE="${REPOSITORY##*/}"
 
-# Convert to lowercase
+# Convert workflow and repository name to lowercase
 WORKFLOW_LOWERCASE=$(echo "$WORKFLOW" | tr '[:upper:]' '[:lower:]')
-echo $WORKFLOW_LOWERCASE
+echo "Workflow: " $WORKFLOW_LOWERCASE
 REPOSITORY_LOWERCASE=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]')
-echo $REPOSITORY_LOWERCASE
+echo "Repository: " $REPOSITORY_LOWERCASE
 
 
-# Dynamically determine which Google Chat URL to use
+# Dynamically determine which Collection Paremeters to be used
 if [[ "$WORKFLOW_LOWERCASE" == *"test"* && "$REPOSITORY_LOWERCASE" == *"binbin-api-gateway"* ]]; then
     COLLECTION_ID="$BINBINAPIGW_COLLECTION_ID"
     ENVIRONMENT_ID="$BINBINAPIGW_TEST_ENVIRONMENT_ID"
@@ -45,7 +48,7 @@ elif [[ "$WORKFLOW_LOWERCASE" == *"test"* && "$REPOSITORY_LOWERCASE" == *"algori
 fi
 
 
-
+#The Newman Command
 newman run https://api.getpostman.com/collections/$COLLECTION_ID\?apikey\=$POSTMAN_API_TOKEN -e https://api.getpostman.com/environments/$ENVIRONMENT_ID\?apikey\=$POSTMAN_API_TOKEN -r cli,json,postman-cloud,htmlextra --reporter-json-export newman_json_report.json --reporter-postman-cloud-apiKey $POSTMAN_API_TOKEN --reporter-postman-cloud-workspaceId $POSTMAN_WORKSPACE_ID --reporter-htmlextra-export testResults/htmlreport.html | tee newman_terminal_output.txt
 
 
