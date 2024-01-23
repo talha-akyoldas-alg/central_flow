@@ -54,7 +54,7 @@ JSON_PAYLOAD=$(cat << EOM
                         {
                             "keyValue": {
                                 "topLabel": "Result",
-                                "content": "$SUCCESS_RATIO% SUCCESS"
+                                "content": "$SUCCESS_RATIO% Success"
                             }
                         },
                         {
